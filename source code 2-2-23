@@ -1,0 +1,20 @@
+#include <iostream>
+#include <string>
+#include <sentilib.h>
+
+int main() {
+    std::string text;
+    std::cout << "Enter a text string: ";
+    std::getline(std::cin, text);
+    SentiLib::init();
+    SentiLib::AnalysisResult result = SentiLib::analyze(text);
+    SentiLib::cleanup();
+    if (result.polarity > 0) {
+        std::cout << "Sentiment: positive" << std::endl;
+    } else if (result.polarity < 0) {
+        std::cout << "Sentiment: negative" << std::endl;
+    } else {
+        std::cout << "Sentiment: neutral" << std::endl;
+    }
+    return 0;
+}

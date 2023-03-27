@@ -1,0 +1,10 @@
+AMD_Ryzen 5 5600X 
+AMD_Ryzen 7 5800X 
+Intel_Core i9-13900K 
+Intel_Core i5-13600K 
+Intel_Core i7-13700K 
+AMD_Ryzen 7 7700X 
+Intel_Core i5-12400F 
+AMD_Ryzen 7 5800X3D 
+AMD_Ryzen 9 7950X 
+Intel_Core i3-12100F 

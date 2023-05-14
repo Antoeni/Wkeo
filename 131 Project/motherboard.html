@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WKEO Builds</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/3cc47db67a.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!--Navbar Section-->
+    <nav class="navbar">
+        <div class="navbar_container">
+            <a href="/" id="navbar_logo"> 
+                <i class="fa-solid fa-computer"></i> Build</a>
+            <div class="navbar_toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="navbar_menu">
+                <li class="navbar_item">
+                    <a href="/" class="navbar_links"> Home </a>
+                </li>
+                <li class="navbar_item">
+                    <a href="/Componets.html" class="navbar_links"> Components </a> <!--added redirect for a Components page-->
+                </li>
+                <li class="navbar_item">
+                    <a href="/Saved.html" class="navbar_links"> Saved </a> <!--added redirect for a Saved page-->
+                </li>
+                <li class="navbar_btn">
+                    <a href="/" class="button"> Sign Up </a> <!--added redirect for a sign up page-->
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!--Hero Section-->
+    <ul class="list_container">
+        <li class="list_item">
+            <button id="mb-select" class="list_button"><a href="/Componets.html">Select</a></button>
+            <button class="list_button"><a href="https://www.amazon.com/dp/B089CWDHFZ?tag=pcpapi-20&linkCode=ogi&th=1&psc=1" 
+            target="_blank" rel="noopener noreferrer">Link</a></button>
+            <span>MSI MAG B550 TOMAHAWK</span>
+            <span>$169.99</span>
+            <img src="images/mb1.jpg" alt="pic" id="item_image">
+        </li>
+        <li class="list_item">
+            <button id="mb-select" class="list_button"><a href="/Componets.html">Select</a></button>
+            <button class="list_button"><a href="https://www.amazon.com/dp/B0BH9DXY38?tag=pcpapi-20&linkCode=ogi&th=1" 
+            target="_blank" rel="noopener noreferrer">Link</a></button>
+            <span>Gigabyte Z790 AORUS ELITE AX</span>
+            <span>$254.99</span>
+            <img src="images/mb2.jpg" alt="pic" id="item_image">
+        </li>
+        <li class="list_item">
+            <button id="mb-select" class="list_button"><a href="/Componets.html">Select</a></button>
+            <button class="list_button"><a href="https://www.amazon.com/dp/B09PXL3ZZB?tag=pcpapi-20&linkCode=ogi&th=1&psc=1" 
+            target="_blank" rel="noopener noreferrer">Link</a></button>
+            <span>MSI MAG B660 TOMAHAWK WIFI</span>
+            <span>$9.99</span>
+            <img src="images/mb3.jpg" alt="pic" id="item_image">
+        </li>
+        <li class="list_item">
+            <button id="mb-select" class="list_button"><a href="/Componets.html">Select</a></button>
+            <button class="list_button"><a href="https://www.amazon.com/dp/B08KH12V25?tag=pcpapi-20&linkCode=ogi&th=1&psc=1" 
+            target="_blank" rel="noopener noreferrer">Link</a></button>
+            <span>Asus Prime B450M-A II Micro</span>
+            <span>$79.99</span>
+            <img src="images/mb4.jpg" alt="pic" id="item_image">
+        </li>
+        <li class="list_item">
+            <button id="mb-select" class="list_button"><a href="/Componets.html">Select</a></button>
+            <button class="list_button"><a href="https://www.amazon.com/dp/B083NMK4BB?tag=pcpapi-20&linkCode=ogi&th=1" 
+            target="_blank" rel="noopener noreferrer">Link</a></button>
+            <span>Gigabyte B660M DS3H AX</span>
+            <span>$118.95</span>
+            <img src="images/mb5.jpg" alt="pic" id="item_image">
+        </li>
+        <li class="list_item">
+            <button id="mb-select" class="list_button"><a href="/Componets.html">Select</a></button>
+            <button class="list_button"><a href="https://www.amazon.com/dp/B08F9VP2RC?tag=pcpapi-20&linkCode=ogi&th=1&psc=1" 
+            target="_blank" rel="noopener noreferrer">Link</a></button>
+            <span>Asus ROG STRIX B550-A</span>
+            <span>$168.99</span>
+            <img src="images/mb6.jpg" alt="pic" id="item_image">
+        </li>
+    </ul>
+
+    <script>
+        /*
+        chatGPT Prompt: enter the code above first ^
+        give me the javascript code so that when i click the button, i add the item name and the item price and image as an object to the local storage
+        */
+    const addButtonListeners = () => {
+        const buttons = document.querySelectorAll('.list_button');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentNode;
+                const name = item.querySelector('span:nth-of-type(1)').textContent;
+                const price = item.querySelector('span:nth-of-type(2)').textContent;
+                const image = item.querySelector('img').getAttribute('src');
+                const link = item.querySelector('.list_button:last-of-type a').getAttribute('href');
+
+                const itemObject = { name, price, image, link };
+
+                const items = JSON.parse(localStorage.getItem('mb-choice')) || [];
+                items.push(itemObject);
+                localStorage.setItem('mb-choice', JSON.stringify(items));
+            });
+        });
+    };
+
+    addButtonListeners();
+
+    </script>
+
+    <script src = "app.js"></script>
+</body>
+</html>

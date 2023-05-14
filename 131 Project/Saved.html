@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WKEO Builds</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/3cc47db67a.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!--Navbar Section-->
+  <nav class="navbar">
+    <div class="navbar_container">
+        <a href="/" id="navbar_logo"> 
+            <i class="fa-solid fa-computer"></i> Build</a>
+        <div class="navbar_toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="navbar_menu">
+            <li class="navbar_item">
+                <a href="/" class="navbar_links"> Home </a>
+            </li>
+            <li class="navbar_item">
+                <a href="/Componets.html" class="navbar_links"> Components </a> <!--added redirect for a Components page-->
+            </li>
+            <li class="navbar_item">
+                <a href="/Saved.html" class="navbar_links"> Saved </a> <!--added redirect for a Saved page-->
+            </li>
+            <li class="navbar_btn">
+                <a href="/" class="button"> Sign Up </a> <!--added redirect for a sign up page-->
+            </li>
+        </ul>
+    </div>
+</nav>
+
+  <h1>Current List</h1>
+  <ul id="List" class="list_container"></ul>
+
+  <!--Clear all data-->
+  <button id="Clear" class="clear-button"><h1><a href="/Saved.html">Clear</a></h1></button>
+
+  <script>
+    /*
+    chatGPT Prompt: 
+    continuation from the code from one of the components page
+    1 - I want this to be displayed on a different page
+    2 - modify this code so that it displays multiple local storge keys, assume that the objects are the same arrangment
+    3 - there is a bug where if there are multiple objects under 'item1', it displays all of them, modify the code so that it only displays the lastest and displays multiple different keys
+    */
+    const displayItems = (keys) => {
+  const itemsContainer = document.getElementById('List');
+
+  keys.forEach(key => {
+    const items = JSON.parse(localStorage.getItem(key)) || [];
+    const latestItem = items.slice(-1)[0];
+
+    if (latestItem) {
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'list_item';
+
+      const nameSpan = document.createElement('span');
+      nameSpan.textContent = latestItem.name;
+
+      const priceSpan = document.createElement('span');
+      priceSpan.textContent = latestItem.price;
+
+      const image = document.createElement('img');
+      image.src = latestItem.image;
+      image.alt = latestItem.name;
+      image.id = 'item_image';
+
+      const button1 = document.createElement('button');
+      button1.className = 'list_button';
+      button1.innerHTML = 'Buy';
+      button1.addEventListener('click', function() {
+      window.open(latestItem.link, '_blank');
+      });
+
+      const button2 = document.createElement('button');
+      button2.className = 'list_button';
+      button2.id = 'remove';
+      button2.innerHTML = 'Delete';
+      button2.addEventListener('click', removeItem.bind(this,key));
+
+      itemDiv.appendChild(button1);
+      itemDiv.appendChild(button2);
+      itemDiv.appendChild(nameSpan);
+      itemDiv.appendChild(priceSpan);
+      itemDiv.appendChild(image);
+
+      itemsContainer.appendChild(itemDiv);
+    }
+  });
+};
+
+displayItems(['cpu-choice', 'mb-choice', 'gpu-choice', 'psu-choice', 'ram-choice', 'cooler-choice', 'case-choice', 'storage-choice']);
+
+document.getElementById('Clear').addEventListener("click", function(){
+    localStorage.clear();
+});
+
+function removeItem(key){
+  localStorage.removeItem(key);
+  location.reload();
+}
+
+  </script>
+</body>
+</html>
